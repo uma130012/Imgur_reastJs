@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Row, Card, CardGroup } from "react-bootstrap";
+import { Col, Row, Card } from "react-bootstrap";
 
 function Cards({ toggle }) {
   return (

@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from "react";
-import { Container, Row, Button, Col, Stack, Navbar } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Row, Button, Col, Navbar } from "react-bootstrap";
 import Cards from "./Cards";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 
 function Gallery() {
   const [toggle, setToggle] = useState(false);
