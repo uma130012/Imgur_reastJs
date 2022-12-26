@@ -1,20 +1,64 @@
-import React from "react";
-import { Container, Row, Button, Col, Form, Stack } from "react-bootstrap";
+import React, { useState, useCallback } from "react";
+import { Container, Row, Button, Col, Stack, Navbar } from "react-bootstrap";
+import Cards from "./Cards";
+import { Formik, Form, Field } from "formik";
 
 function Gallery() {
+  const [toggle, setToggle] = useState(false);
+
+  const onToggle = () => {
+    setToggle(!toggle);
+  };
+
+  const onSubmit = (value) => {
+    console.log(value);
+  };
+  const initialValues = {
+    search: "",
+  };
+
   return (
-    <Container>
-      <Row style={{ backgroundColor: "red" }}>
-        <Col lg={6}>sm=8</Col>
-        <Col lg={6}>sm=4</Col>
-        {/* <Col xs={10}>
-          <input type="text" name="name"></input>
-        </Col>
-        <Col xs={2}>
-          <Button variant="info">List</Button>
-        </Col> */}
-      </Row>
-    </Container>
+    <>
+      <Navbar expand="lg" sticky="top" className="nav">
+        <Container className="header">
+          <Row>
+            <Col lg={10}>
+              <Formik onSubmit={onSubmit} initialValues={initialValues}>
+                {(formik) => {
+                  return (
+                    <Form className="inputForm">
+                      <input
+                        className="searchInput"
+                        type="text"
+                        name="search"
+                        placeholder="Search here.."
+                        value={formik.values?.search || ""}
+                        onChange={(e) => {
+                          e.preventDefault();
+                          formik.setFieldValue("search", e.target.value);
+                        }}
+                      />
+                      <span />
+                      <Button disabled={!formik.dirty} type="submit">
+                        Search
+                      </Button>
+                    </Form>
+                  );
+                }}
+              </Formik>
+            </Col>
+            <Col lg={2} className="toggleBtn">
+              <Button variant="info" onClick={onToggle}>
+                {toggle ? "Grid" : "List"}
+              </Button>
+            </Col>
+          </Row>
+        </Container>
+      </Navbar>
+      <Container>
+        <Cards toggle={toggle} />
+      </Container>
+    </>
   );
 }
 
