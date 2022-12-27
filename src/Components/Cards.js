@@ -1,26 +1,54 @@
 import React from "react";
+import moment from "moment";
 import { Col, Row, Card } from "react-bootstrap";
 
-function Cards({ toggle }) {
+function Cards({ toggle, galleyList }) {
+  function MediaComponent({ type, link }) {
+    return (
+      <>
+        {type === "video/mp4" ? (
+          <video controls width="100%" autoPlay={false}>
+            <source src={link} type="video/mp4" />
+          </video>
+        ) : (
+          <Card.Img variant="top" src={link} />
+        )}
+      </>
+    );
+  }
+
   return (
-    <Row xs={1} md={toggle ? 3 : 1} className="g-4 cards">
-      {Array.from({ length: 4 }).map((_, idx) => (
-        <Col>
-          <Card>
-            <Card.Body>
-              <Card.Title>Card title</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">
-                Card Subtitle
-              </Card.Subtitle>
-            </Card.Body>
-            <Card.Img
-              variant="top"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
-            />
-          </Card>
-        </Col>
-      ))}
-    </Row>
+    <>
+      {galleyList?.length > 0 ? (
+        <Row xs={1} md={toggle ? 3 : 1} className="g-4 cards">
+          {galleyList?.map((item, idx) => (
+            <Col>
+              <Card>
+                <Card.Body>
+                  <Card.Title className="text">{item?.title || ""}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted ">
+                    {moment(new Date(parseInt(item.datetime * 1000))).format(
+                      "DD/MM/yy hh:mm a"
+                    )}
+                    {/* {new Date(parseInt(item.datetime * 1000)).toLocaleString()} */}
+                  </Card.Subtitle>
+                </Card.Body>
+                {item?.images?.length > 0 ? (
+                  <MediaComponent
+                    type={item?.images[0].type}
+                    link={item?.images[0].link}
+                  />
+                ) : (
+                  <MediaComponent type={item?.type} link={item?.link} />
+                )}
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
 
