@@ -1,13 +1,16 @@
 # Getting Started with App
 
-
+## Follow the stpes
+1. Clone project from git or download zip file from this link: [https://drive.google.com/file/d/10dtapWQBLrCdcLm-JuElQB-sAKtcq1Wv/view?usp=share_link]
+2. Open the project in development IDE
 
 ## Available Scripts
 
 In the project directory, you can run:
 
 ### `npm install`
-Install all the dependancy
+Install all the dependancy (make sure in your already have node, npm & nvm installed)
+~ if you face any issue to run project or command i.e `npm install` please install firstly node version: `14.19.0`, npm version: `6.14.16` is it base on node version 
 
 ### `npm start`
 
