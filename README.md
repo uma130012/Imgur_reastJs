@@ -1,8 +1,13 @@
 # Getting Started with App
 
+
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm install`
+Install all the dependancy
 
 ### `npm start`
 
